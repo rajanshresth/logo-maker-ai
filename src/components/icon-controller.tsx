@@ -1,6 +1,7 @@
 import { Smile } from "lucide-react";
 import React, { useState } from "react";
 import { Slider } from "@/components/ui/slider";
+import ColorController from "./color-controller";
 
 const DEFAULT_SIZE = 32;
 
@@ -8,6 +9,7 @@ const IconController = () => {
   const [iconSize, setIconSize] = useState(DEFAULT_SIZE);
   const [iconRotate, setIconRotate] = useState(0);
 
+  const [iconColor, setIconColor] = useState("rgba(255,255,255,1)"); // [1
   // Define the type for the slider change event
   const handleSliderChange = (value: number[]) => {
     if (value.length > 0) {
@@ -15,8 +17,12 @@ const IconController = () => {
     }
   };
 
+  const handleColorChange = (color: string) => {
+    setIconColor(color);
+  };
+
   return (
-    <div className="m-4 flex flex-col gap-4">
+    <div className="m-4 flex flex-col gap-4 overflow-auto">
       <div className="flex flex-col gap-2">
         <label htmlFor="icon">Icons</label>
         <div
@@ -52,6 +58,10 @@ const IconController = () => {
           onValueChange={(value) => setIconRotate(value[0])}
         />
       </div>
+      <ColorController
+        hideController={true}
+        selectedColor={handleColorChange}
+      />
     </div>
   );
 };

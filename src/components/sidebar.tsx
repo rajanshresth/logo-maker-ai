@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { PencilRuler, ImagePlay, BrainCircuit } from "lucide-react";
-import { stat } from "fs";
 
 interface SideBarProps {
   currentController: (value: "Icons" | "Background" | "AI_Generate") => void;

@@ -32,10 +32,10 @@ export default function Home() {
             setCurrentController(value as ControllerState)
           }
         />
-        <section className="bg-red-200 w-[40%] h-screen">
+        <section className=" w-[40%] h-screen overflow-auto custom-scrollbar">
           {ControllerComponent}
         </section>
-        <section className="bg-blue-400 w-[60%] h-screen">Icon Preview</section>
+        <section className=" w-[60%] h-screen">Icon Preview</section>
       </div>
     </main>
   );
