@@ -1,8 +1,8 @@
+"use client";
 import { Smile } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Slider } from "@/components/ui/slider";
 import ColorController from "./color-controller";
-import { storeValue } from "@/lib/utils";
 
 const DEFAULT_SIZE = 32;
 
@@ -22,6 +22,7 @@ const IconController = () => {
     setIconColor(color);
   };
 
+  const storeValue = JSON.parse(localStorage.getItem("value") || "{}");
   useEffect(() => {
     const updatedValue = {
       ...storeValue,
@@ -31,7 +32,7 @@ const IconController = () => {
       icon: "Smile",
     };
     localStorage.setItem("value", JSON.stringify(updatedValue));
-  }, [iconSize, iconRotate, iconColor]);
+  }, [iconSize, iconRotate, iconColor, storeValue]);
 
   return (
     <div className="m-4 flex flex-col gap-4 overflow-auto">

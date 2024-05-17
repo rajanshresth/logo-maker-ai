@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import ColorPicker from "react-best-gradient-color-picker";
 

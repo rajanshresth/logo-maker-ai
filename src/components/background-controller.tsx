@@ -1,7 +1,7 @@
+"use client";
 import React, { use, useEffect, useState } from "react";
 import { Slider } from "@/components/ui/slider";
 import ColorController from "./color-controller";
-import { storeValue } from "@/lib/utils";
 
 const DEFAULT_SIZE = 32;
 
@@ -20,6 +20,7 @@ const BackgroundController = () => {
   const handleColorChange = (color: string) => {
     setBackgroundColor(color);
   };
+  const storeValue = JSON.parse(localStorage.getItem("value") || "{}");
   useEffect(() => {
     const updatedValue = {
       ...storeValue,
@@ -28,7 +29,7 @@ const BackgroundController = () => {
       backgroundColor: backgroundColor,
     };
     localStorage.setItem("value", JSON.stringify(updatedValue));
-  }, [backgroundSize, backgroundPadding, backgroundColor]);
+  }, [backgroundSize, backgroundPadding, backgroundColor, storeValue]);
 
   return (
     <div className="m-4 flex flex-col gap-4 overflow-auto">
