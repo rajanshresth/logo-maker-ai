@@ -4,6 +4,7 @@ import AI_Generator from "@/components/ai-generator";
 import BackgroundController from "@/components/background-controller";
 import IconController from "@/components/icon-controller";
 import SideBar from "@/components/sidebar";
+import LogoPreview from "@/components/logo-preview";
 
 enum ControllerState {
   Icons = "Icons",
@@ -35,7 +36,9 @@ export default function Home() {
         <section className=" w-[40%] h-screen overflow-auto custom-scrollbar">
           {ControllerComponent}
         </section>
-        <section className=" w-[60%] h-screen">Icon Preview</section>
+        <section className=" w-[60%] h-screen flex justify-center items-center">
+          <LogoPreview />
+        </section>
       </div>
     </main>
   );

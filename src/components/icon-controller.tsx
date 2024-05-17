@@ -1,7 +1,8 @@
 import { Smile } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Slider } from "@/components/ui/slider";
 import ColorController from "./color-controller";
+import { storeValue } from "@/lib/utils";
 
 const DEFAULT_SIZE = 32;
 
@@ -20,6 +21,17 @@ const IconController = () => {
   const handleColorChange = (color: string) => {
     setIconColor(color);
   };
+
+  useEffect(() => {
+    const updatedValue = {
+      ...storeValue,
+      iconSize: iconSize,
+      iconRotate: iconRotate,
+      iconColor: iconColor,
+      icon: "Smile",
+    };
+    localStorage.setItem("value", JSON.stringify(updatedValue));
+  }, [iconSize, iconRotate, iconColor]);
 
   return (
     <div className="m-4 flex flex-col gap-4 overflow-auto">
