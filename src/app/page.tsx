@@ -1,14 +1,10 @@
+import SideBar from "@/components/sidebar";
 import { Button } from "@/components/ui/button";
-import { UserButton } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
 
 export default function Home() {
-  const { userId } = auth();
-
   return (
-    <main>
-      <Button>Click me</Button>
-      <UserButton />
+    <main className="overflow-hidden">
+      <SideBar />
     </main>
   );
 }

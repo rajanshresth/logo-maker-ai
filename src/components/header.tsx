@@ -1,14 +1,10 @@
-import { Download, User } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { Button } from "./ui/button";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
-import Link from "next/link";
 import { ModeToggle } from "./mode-toggle";
 
 const Header = () => {
-  const { userId } = auth();
   return (
     <header className="flex justify-between items-center ">
       <div className="flex gap-2 justify-center items-center">
