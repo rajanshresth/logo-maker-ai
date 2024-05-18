@@ -1,17 +1,21 @@
 "use client";
+
 import { Smile } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Slider } from "@/components/ui/slider";
 import ColorController from "./color-controller";
+import { UpdateStorageContext } from "@/context/update-storage-context";
 
 const DEFAULT_SIZE = 32;
 
-const IconController = () => {
-  const [iconSize, setIconSize] = useState(DEFAULT_SIZE);
-  const [iconRotate, setIconRotate] = useState(0);
+const IconController: React.FC = () => {
+  const [iconSize, setIconSize] = useState<number>(DEFAULT_SIZE);
+  const [iconRotate, setIconRotate] = useState<number>(0);
+  const [iconColor, setIconColor] = useState<string>("rgba(255,255,255,1)");
 
-  const [iconColor, setIconColor] = useState("rgba(255,255,255,1)"); // [1
-  // Define the type for the slider change event
+  const { setUpdateStorage, updateStorage } =
+    useContext(UpdateStorageContext) || {};
+
   const handleSliderChange = (value: number[]) => {
     if (value.length > 0) {
       setIconSize(value[0]);
@@ -22,8 +26,8 @@ const IconController = () => {
     setIconColor(color);
   };
 
-  const storeValue = JSON.parse(localStorage.getItem("value") || "{}");
   useEffect(() => {
+    const storeValue = JSON.parse(localStorage.getItem("value") || "{}");
     const updatedValue = {
       ...storeValue,
       iconSize: iconSize,
@@ -31,8 +35,11 @@ const IconController = () => {
       iconColor: iconColor,
       icon: "Smile",
     };
+    if (setUpdateStorage) {
+      setUpdateStorage(updatedValue);
+    }
     localStorage.setItem("value", JSON.stringify(updatedValue));
-  }, [iconSize, iconRotate, iconColor, storeValue]);
+  }, [iconSize, iconRotate, iconColor, setUpdateStorage]);
 
   return (
     <div className="m-4 flex flex-col gap-4 overflow-auto">
@@ -41,8 +48,12 @@ const IconController = () => {
         <div
           id="icon"
           className="flex items-center justify-center cursor-pointer bg-gray-400 dark:bg-slate-400 w-12 h-12 rounded-lg"
+          style={{
+            transform: `rotate(${iconRotate}deg)`,
+            backgroundColor: iconColor,
+          }}
         >
-          <Smile size={DEFAULT_SIZE} />
+          <Smile size={iconSize} color={iconColor} />
         </div>
       </div>
       <div className="flex flex-col gap-2">
@@ -58,7 +69,7 @@ const IconController = () => {
           onValueChange={handleSliderChange}
         />
       </div>
-      <div>
+      <div className="flex flex-col gap-2">
         <label htmlFor="rotate" className="flex justify-between">
           <span>Rotate</span>
           <span>{iconRotate}°</span>

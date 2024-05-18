@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Header from "@/components/header";
 import { ThemeProvider } from "next-themes";
 import { Analytics } from "@vercel/analytics/react";
+import ClientProvider from "@/components/client-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,7 +30,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Header />
-            {children}
+            <ClientProvider>{children}</ClientProvider>
             <Analytics />
           </ThemeProvider>
         </body>

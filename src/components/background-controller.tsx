@@ -8,9 +8,8 @@ const DEFAULT_SIZE = 32;
 const BackgroundController = () => {
   const [backgroundSize, setBackgroundSize] = useState(DEFAULT_SIZE);
   const [backgroundPadding, setBackgroundPadding] = useState(0);
+  const [backgroundColor, setBackgroundColor] = useState("rgba(255,255,255,1)");
 
-  const [backgroundColor, setBackgroundColor] = useState("rgba(255,255,255,1)"); // [1
-  // Define the type for the slider change event
   const handleSliderChange = (value: number[]) => {
     if (value.length > 0) {
       setBackgroundSize(value[0]);
