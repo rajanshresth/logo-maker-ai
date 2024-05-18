@@ -1,10 +1,9 @@
-// src/components/IconController.tsx
 "use client";
-import { Smile } from "lucide-react";
 import React from "react";
 import { Slider } from "@/components/ui/slider";
 import ColorController from "./color-controller";
 import { useCombinedContext } from "@/context/combined-context";
+import { IconList } from "./icon-list";
 const DEFAULT_SIZE = 32;
 
 const IconController: React.FC = () => {
@@ -31,16 +30,7 @@ const IconController: React.FC = () => {
     <div className="m-4 flex flex-col gap-4 overflow-auto">
       <div className="flex flex-col gap-2">
         <label htmlFor="icon">Icons</label>
-        <div
-          id="icon"
-          className="flex items-center justify-center cursor-pointer bg-gray-400 dark:bg-slate-400 w-12 h-12 rounded-lg"
-          style={{
-            transform: `rotate(${iconRotate}deg)`,
-            backgroundColor: iconColor,
-          }}
-        >
-          <Smile size={iconSize} color={iconColor} />
-        </div>
+        <IconList />
       </div>
       <div className="flex flex-col gap-2">
         <label htmlFor="size" className="flex justify-between">

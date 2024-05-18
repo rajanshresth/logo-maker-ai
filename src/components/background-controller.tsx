@@ -35,7 +35,7 @@ const BackgroundController = () => {
         </label>
         <Slider
           defaultValue={[DEFAULT_SIZE]}
-          max={512}
+          max={256}
           min={1}
           step={1}
           onValueChange={handleSliderChange}

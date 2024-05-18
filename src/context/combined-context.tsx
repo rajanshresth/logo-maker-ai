@@ -20,6 +20,8 @@ interface CombinedContextProps {
   setIconRotate: (rotate: number) => void;
   iconColor: string;
   setIconColor: (color: string) => void;
+  iconName: string;
+  setIconName: (name: string) => void;
 }
 
 const CombinedContext = createContext<CombinedContextProps | undefined>(
@@ -33,6 +35,7 @@ export const CombinedProvider = ({ children }: { children: ReactNode }) => {
   const [iconSize, setIconSize] = useState(32);
   const [iconRotate, setIconRotate] = useState(0);
   const [iconColor, setIconColor] = useState("rgba(255,255,255,1)");
+  const [iconName, setIconName] = useState("Smile");
 
   useEffect(() => {
     const storedValue = JSON.parse(localStorage.getItem("value") || "{}");
@@ -43,6 +46,7 @@ export const CombinedProvider = ({ children }: { children: ReactNode }) => {
       setIconSize(storedValue.iconSize || 32);
       setIconRotate(storedValue.iconRotate || 0);
       setIconColor(storedValue.iconColor || "rgba(255,255,255,1)");
+      setIconName(storedValue.icon || "Smile");
     }
   }, []);
 
@@ -54,7 +58,7 @@ export const CombinedProvider = ({ children }: { children: ReactNode }) => {
       iconSize,
       iconRotate,
       iconColor,
-      icon: "Smile",
+      icon: iconName,
     };
     localStorage.setItem("value", JSON.stringify(updatedValue));
   }, [
@@ -64,6 +68,7 @@ export const CombinedProvider = ({ children }: { children: ReactNode }) => {
     iconSize,
     iconRotate,
     iconColor,
+    iconName,
   ]);
 
   return (
@@ -75,6 +80,8 @@ export const CombinedProvider = ({ children }: { children: ReactNode }) => {
         setBackgroundSize,
         backgroundPadding,
         setBackgroundPadding,
+        iconName,
+        setIconName,
         iconSize,
         setIconSize,
         iconRotate,

@@ -1,7 +1,10 @@
 "use client";
 import React from "react";
-import { Smile } from "lucide-react";
+import { icons } from "lucide-react";
 import { useCombinedContext } from "@/context/combined-context";
+import { IconLucide } from "./icon-list";
+
+type IconName = keyof typeof icons;
 
 const LogoPreview: React.FC = () => {
   const {
@@ -11,25 +14,29 @@ const LogoPreview: React.FC = () => {
     iconSize,
     iconRotate,
     iconColor,
+    iconName,
   } = useCombinedContext();
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="h-[400px] w-[400px] bg-gray-200 outline-dotted outline-gray-300">
+      <div
+        className="h-[400px] w-[400px] bg-gray-200 outline-dotted outline-gray-400"
+        style={{
+          padding: `${backgroundPadding}px`,
+        }}
+      >
         <div
           className="h-full w-full flex items-center justify-center"
           style={{
-            backgroundColor,
-            padding: `${backgroundPadding}px`,
+            background: backgroundColor,
             borderRadius: `${backgroundSize}px`,
           }}
         >
-          <Smile
+          <IconLucide
+            name={iconName as IconName}
             size={iconSize}
             color={iconColor}
-            style={{
-              transform: `rotate(${iconRotate}deg)`,
-            }}
+            rotate={iconRotate}
           />
         </div>
       </div>
