@@ -1,14 +1,20 @@
+// src/components/BackgroundController.tsx
 "use client";
-import React, { use, useEffect, useState } from "react";
+import React from "react";
 import { Slider } from "@/components/ui/slider";
 import ColorController from "./color-controller";
-
+import { useCombinedContext } from "@/context/combined-context";
 const DEFAULT_SIZE = 32;
 
 const BackgroundController = () => {
-  const [backgroundSize, setBackgroundSize] = useState(DEFAULT_SIZE);
-  const [backgroundPadding, setBackgroundPadding] = useState(0);
-  const [backgroundColor, setBackgroundColor] = useState("rgba(255,255,255,1)");
+  const {
+    backgroundColor,
+    setBackgroundColor,
+    backgroundSize,
+    setBackgroundSize,
+    backgroundPadding,
+    setBackgroundPadding,
+  } = useCombinedContext();
 
   const handleSliderChange = (value: number[]) => {
     if (value.length > 0) {
@@ -19,16 +25,6 @@ const BackgroundController = () => {
   const handleColorChange = (color: string) => {
     setBackgroundColor(color);
   };
-  const storeValue = JSON.parse(localStorage.getItem("value") || "{}");
-  useEffect(() => {
-    const updatedValue = {
-      ...storeValue,
-      backgroundSize: backgroundSize,
-      backgroundPadding: backgroundPadding,
-      backgroundColor: backgroundColor,
-    };
-    localStorage.setItem("value", JSON.stringify(updatedValue));
-  }, [backgroundSize, backgroundPadding, backgroundColor, storeValue]);
 
   return (
     <div className="m-4 flex flex-col gap-4 overflow-auto">
@@ -46,8 +42,8 @@ const BackgroundController = () => {
         />
       </div>
       <div>
-        <label htmlFor="rotate" className="flex justify-between">
-          <span>padding</span>
+        <label htmlFor="padding" className="flex justify-between">
+          <span>Padding</span>
           <span>{backgroundPadding}px</span>
         </label>
         <Slider

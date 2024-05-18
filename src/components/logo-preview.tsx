@@ -1,36 +1,37 @@
 "use client";
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
+import { Smile } from "lucide-react";
+import { useCombinedContext } from "@/context/combined-context";
 
 const LogoPreview: React.FC = () => {
-  const [storageValue, setStorageValue] = useState({
-    backgroundColor: "rgba(255,255,255,1)",
-    backgroundSize: 32,
-    backgroundPadding: 0,
-    iconSize: 32,
-    iconRotate: 0,
-    iconColor: "rgba(255,255,255,1)",
-  });
-  console.log(storageValue);
-  useEffect(() => {
-    const localStorageValue = JSON.parse(localStorage.getItem("value") || "{}");
-    const { backgroundColor, backgroundSize, backgroundPadding } =
-      localStorageValue;
-    console.log(localStorageValue);
-
-    setStorageValue(localStorageValue);
-  }, [storageValue]);
+  const {
+    backgroundColor,
+    backgroundSize,
+    backgroundPadding,
+    iconSize,
+    iconRotate,
+    iconColor,
+  } = useCombinedContext();
 
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="h-[400px] w-[400px] bg-gray-200 outline-dotted outline-gray-300">
         <div
-          className="h-full w-full"
+          className="h-full w-full flex items-center justify-center"
           style={{
-            backgroundColor: storageValue.backgroundColor,
-            padding: `${storageValue.backgroundPadding}px`,
-            borderRadius: `${storageValue.backgroundSize}px`,
+            backgroundColor,
+            padding: `${backgroundPadding}px`,
+            borderRadius: `${backgroundSize}px`,
           }}
-        ></div>
+        >
+          <Smile
+            size={iconSize}
+            color={iconColor}
+            style={{
+              transform: `rotate(${iconRotate}deg)`,
+            }}
+          />
+        </div>
       </div>
     </div>
   );
