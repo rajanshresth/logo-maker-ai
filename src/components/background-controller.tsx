@@ -1,9 +1,9 @@
-// src/components/BackgroundController.tsx
 "use client";
 import React from "react";
 import { Slider } from "@/components/ui/slider";
 import ColorController from "./color-controller";
 import { useCombinedContext } from "@/context/combined-context";
+
 const DEFAULT_SIZE = 32;
 
 const BackgroundController = () => {

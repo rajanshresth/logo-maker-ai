@@ -35,9 +35,19 @@ export const CombinedProvider = ({ children }: { children: ReactNode }) => {
   const [iconColor, setIconColor] = useState("rgba(255,255,255,1)");
 
   useEffect(() => {
-    const storeValue = JSON.parse(localStorage.getItem("value") || "{}");
+    const storedValue = JSON.parse(localStorage.getItem("value") || "{}");
+    if (storedValue) {
+      setBackgroundColor(storedValue.backgroundColor || "rgba(255,255,255,1)");
+      setBackgroundSize(storedValue.backgroundSize || 32);
+      setBackgroundPadding(storedValue.backgroundPadding || 0);
+      setIconSize(storedValue.iconSize || 32);
+      setIconRotate(storedValue.iconRotate || 0);
+      setIconColor(storedValue.iconColor || "rgba(255,255,255,1)");
+    }
+  }, []);
+
+  useEffect(() => {
     const updatedValue = {
-      ...storeValue,
       backgroundColor,
       backgroundSize,
       backgroundPadding,
